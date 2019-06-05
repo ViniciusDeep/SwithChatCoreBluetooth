@@ -12,10 +12,29 @@ class GroupController: UIViewController {
     
     fileprivate let groupView = GroupView()
     
+    var messages = [MessageViewModel]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
         setupTableView()
+        groupView.sendButton.addTarget(self, action: #selector(sendMessage), for: .touchUpInside)
+        
+        let tap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyBoard))
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyBoard() {
+        view.endEditing(true)
+    }
+    
+    
+    @objc fileprivate func sendMessage() {
+        if let message = groupView.messageTf.text {
+            let mvm = MessageViewModel(message: Message(text: message, imageProfileUrl: ""))
+            messages.append(mvm)
+            groupView.tableView.reloadData()
+        }
     }
     
     fileprivate func setupView() {
@@ -34,12 +53,13 @@ extension GroupController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return messages.count
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = groupView.tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath) as! ChatCell
-        
+        cell.message = messages[indexPath.row]
         cell.backgroundColor = .white
         return cell
     }

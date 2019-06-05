@@ -10,10 +10,8 @@ import Foundation
 
 
 class MessageViewModel {
-    
     let text: String
     let imageProfile: String
-    
     init(message: Message) {
         self.text = message.text
         self.imageProfile = message.imageProfileUrl

@@ -23,7 +23,7 @@ class Chat {
     
     init(delegate: ChatDelegate) {
         self.delegate = delegate
-        CentralBluetooth.shared.attachObserverPeripheralsList(self as! ObserverPeripheralsList)
+        CentralBluetooth.shared.attachObserverPeripheralsList(self as ObserverPeripheralsList)
     }
     
     

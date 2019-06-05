@@ -8,8 +8,7 @@
 
 import UIKit
 
-class GroupView: UIView, ConfigurableView {
-  
+class GroupView: UIView, ConfigurableView {    
     lazy var tableView: UITableView = {
        let table = UITableView()
         table.translatesAutoresizingMaskIntoConstraints = false

@@ -9,8 +9,14 @@
 import UIKit
 
 class ChatCell: UITableViewCell, ConfigurableView {
-    lazy var imageSend = UIImageView(imageName: "profile")
+    var message: MessageViewModel! {
+        didSet {
+            messageLabel.text = message.text
+        }
+    }
     
+    lazy var imageSend = UIImageView(imageName: "profile")
+    lazy var messageLabel = UILabel(text: "Conectou via bluetooth", textSize: 16, textColor: .black)
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -27,6 +33,7 @@ class ChatCell: UITableViewCell, ConfigurableView {
         imageSend.clipsToBounds = true
         imageSend.layer.cornerRadius = 8
         self.addSubview(imageSend)
+        self.addSubview(messageLabel)
     }
     
     func setupConstraints() {
@@ -34,7 +41,9 @@ class ChatCell: UITableViewCell, ConfigurableView {
             self.imageSend.heightAnchor.constraint(equalToConstant: 65),
             self.imageSend.widthAnchor.constraint(equalToConstant: 65),
             self.imageSend.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            self.imageSend.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 15)
+            self.imageSend.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 15),
+            self.messageLabel.leadingAnchor.constraint(equalTo: self.imageSend.trailingAnchor, constant: 10),
+            self.messageLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor)
             ])
     }
     

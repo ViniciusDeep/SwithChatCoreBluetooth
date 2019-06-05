@@ -33,12 +33,19 @@ class CreateGroupController: UIViewController {
     fileprivate func setupNavigation() {
         self.navigationItem.title = "Create your group"
         let cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(returnToList))
-        let createButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(returnToList))
+        let createButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(createRoom))
         self.navigationItem.rightBarButtonItem = createButton
         self.navigationItem.leftBarButtonItem = cancelButton
     }
     
     @objc fileprivate func returnToList() {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    
+    @objc fileprivate func createRoom() {
+        let roommvm = RoomViewModel(room: Room(name: listGroupView.nameTf.text!, description: listGroupView.descriptionTf.text!, key: listGroupView.keyGroupTf.text))
+        ListGroupsController.rooms.append(roommvm)
+        self.returnToList()
     }
 }
