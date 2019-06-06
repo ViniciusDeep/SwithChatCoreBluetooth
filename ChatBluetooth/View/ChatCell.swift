@@ -16,7 +16,7 @@ class ChatCell: UITableViewCell, ConfigurableView {
     }
     
     lazy var imageSend = UIImageView(imageName: "profile")
-    lazy var messageLabel = UILabel(text: "Conectou via bluetooth", textSize: 16, textColor: .black)
+    lazy var messageLabel = UILabel(text: "Conectou via bluetooth", textSize: 16, textColor: .background)
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -32,6 +32,10 @@ class ChatCell: UITableViewCell, ConfigurableView {
     func buildViewHierarchy() {
         imageSend.clipsToBounds = true
         imageSend.layer.cornerRadius = 8
+        imageSend.layer.borderColor = #colorLiteral(red: 0.007843137255, green: 0.737254902, blue: 0.4039215686, alpha: 1).cgColor
+        imageSend.layer.borderWidth = 3
+        messageLabel.lineBreakMode = .byWordWrapping
+        messageLabel.numberOfLines = 10
         self.addSubview(imageSend)
         self.addSubview(messageLabel)
     }
@@ -43,7 +47,8 @@ class ChatCell: UITableViewCell, ConfigurableView {
             self.imageSend.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             self.imageSend.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 15),
             self.messageLabel.leadingAnchor.constraint(equalTo: self.imageSend.trailingAnchor, constant: 10),
-            self.messageLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor)
+            self.messageLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            self.messageLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10)
             ])
     }
     

@@ -35,7 +35,10 @@ class GroupView: UIView, ConfigurableView {
         self.addSubview(tableView)
         self.addSubview(messageTf)
         self.addSubview(sendButton)
-        messageTf.backgroundColor = #colorLiteral(red: 0.2823529412, green: 0.4745098039, blue: 0.8431372549, alpha: 1)
+        messageTf.backgroundColor = .background
+        messageTf.tintColor = .white
+        messageTf.textColor = .white
+        sendButton.backgroundColor = .background
     }
     
     func setupConstraints() {

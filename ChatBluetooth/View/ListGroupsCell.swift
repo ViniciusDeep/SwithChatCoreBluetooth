@@ -17,7 +17,7 @@ class ListGroupsCell: UICollectionViewCell, ConfigurableView {
         super.init(frame: frame)
         self.backgroundColor = .red
         self.layer.cornerRadius = 16
-        self.layer.borderColor = #colorLiteral(red: 0.5725490451, green: 0, blue: 0.2313725501, alpha: 1).cgColor
+        self.layer.borderColor = #colorLiteral(red: 0.007843137255, green: 0.737254902, blue: 0.4039215686, alpha: 1).cgColor
         self.layer.borderWidth = 3
         buildViewHierarchy()
         setupConstraints()

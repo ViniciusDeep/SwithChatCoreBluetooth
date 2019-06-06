@@ -35,6 +35,10 @@ class GroupController: UIViewController {
             messages.append(mvm)
             groupView.tableView.reloadData()
         }
+        let cells = groupView.tableView.visibleCells as! [ChatCell]
+        cells.forEach { (cell) in
+            print(cell.message.text)
+        }
     }
     
     fileprivate func setupView() {
@@ -54,7 +58,6 @@ extension GroupController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return messages.count
-        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

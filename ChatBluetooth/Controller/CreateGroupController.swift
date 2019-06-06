@@ -31,6 +31,9 @@ class CreateGroupController: UIViewController {
     }
     
     fileprivate func setupNavigation() {
+        navigationController?.navigationBar.barTintColor = .background
+        navigationController?.navigationBar.tintColor = .white
+        navigationController?.navigationBar.titleTextAttributes =  [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 16)]
         self.navigationItem.title = "Create your group"
         let cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(returnToList))
         let createButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(createRoom))

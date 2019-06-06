@@ -9,16 +9,15 @@
 import UIKit
 
 class CreateGroupView: UIView, ConfigurableView {
-    
-    lazy var nameGroup = UILabel(text: "Name of group", textSize: 16, textColor: .red)
+    lazy var nameGroup = UILabel(text: "Name of group", textSize: 16, textColor: .background)
     
     lazy var nameTf = UITextField(placeholder: "Set your name of Group")
     
-    lazy var descriptionGroup = UILabel(text: "Description of group", textSize: 16, textColor: .red)
+    lazy var descriptionGroup = UILabel(text: "Description of group", textSize: 16, textColor: .background)
     
     lazy var descriptionTf = UITextField(placeholder: "Set the description of Group")
     
-    lazy var keyGroup = UILabel(text: "Key group(Optional)", textSize: 16, textColor: .red)
+    lazy var keyGroup = UILabel(text: "Key group(Optional)", textSize: 16, textColor: .background)
     
     lazy var keyGroupTf = UITextField(placeholder: "Set the key")
     

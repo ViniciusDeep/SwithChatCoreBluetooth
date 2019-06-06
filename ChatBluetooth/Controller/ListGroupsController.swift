@@ -39,6 +39,9 @@ extension ListGroupsController: UICollectionViewDelegateFlowLayout {
     }
     
     fileprivate func setupCollection() {
+        navigationController?.navigationBar.barTintColor = .background
+        navigationController?.navigationBar.tintColor = .white
+        navigationController?.navigationBar.titleTextAttributes =  [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 16)]
         navigationItem.title = "List of Groups"
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(changeToCreate))
         collectionView.backgroundColor = .white
@@ -50,6 +53,11 @@ extension ListGroupsController: UICollectionViewDelegateFlowLayout {
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if ListGroupsController.rooms.count == 0 {
+               let emptyView = EmptyView()
+                collectionView.addSubview(emptyView)
+                emptyView.fillSuperview()
+            }
         return ListGroupsController.rooms.count
     }
     

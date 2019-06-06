@@ -9,7 +9,7 @@
 import Foundation
 import CoreBluetooth
 
-class ChatRoomPeripheral: NSObject {
+class ChatPeripheral: NSObject {
     
     fileprivate var peripheralServiceChat: CBService?
     var delegate: ChatRoomDelegate?
@@ -24,16 +24,12 @@ class ChatRoomPeripheral: NSObject {
         self.peripheral.discoverServices(nil)
     }
     
-    func sendMessage(_ text: String) {
-        peripheral.writeValue(text.data(using: .utf8)!, for: peripheralServiceChat!.characteristics!.last!, type: .withResponse)
+    func sendMessage(_ message: Message) {
+        peripheral.writeValue(message.text.data(using: .utf8)!, for: peripheralServiceChat!.characteristics!.last!, type: .withResponse)
     }
 }
 
-extension ChatRoomPeripheral: CBPeripheralDelegate {
-    // Esses três métodos são para reconhecer o bluetooth periférico, os services e characteristics.
-    // Eles são executados encadeamente.
-    // Nós precisamos ao atributo peripheralServiceChat o serviço de chat e também as characteristics dele.
-    
+extension ChatPeripheral: CBPeripheralDelegate {
     internal func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
         if let error = error {
             print("error: \(error)")
@@ -42,7 +38,7 @@ extension ChatRoomPeripheral: CBPeripheralDelegate {
         
         let services = peripheral.services!
         print("Found \(services.count) services! :\(services)")
-        peripheralServiceChat = services.last! // TODO: preciso garantir que realmente vá atribuir o <CBService: 0x170264900, isPrimary = YES, UUID = 1000>
+        peripheralServiceChat = services.last!
         
         peripheral.discoverCharacteristics(nil, for: peripheralServiceChat!)
     }
@@ -64,11 +60,11 @@ extension ChatRoomPeripheral: CBPeripheralDelegate {
             print("error: \(error)")
         } else {
             print("isNotifying: \(characteristic.isNotifying)")
-            delegate!.chatLoadFinish() // Terminamos de instanciar o atributo peripheralServiceChat, todo o serviço de chat foi carregado
+            delegate!.chatLoadFinish()
         }
     }
     
-    // Delegate chamado quando o valor de um characteristic for alterado
+    
     internal func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
         if let error = error {
             print("error: \(error)")
@@ -77,7 +73,7 @@ extension ChatRoomPeripheral: CBPeripheralDelegate {
         
         print("characteristic UUID: \(characteristic.uuid), value: \(String(describing: characteristic.value))")
         
-        // TODO: Esse delegate só é para ser chamado quando o uuid do characteristic for igual ao valor do CBUUID.characteristicChatMessage
+     
         delegate!.receivedMessage(String(data: characteristic.value!, encoding: .utf8)!)
     }
 }
